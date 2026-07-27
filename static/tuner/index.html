@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吉他调音器</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #16213e;
+            --text: #e0e0e0;
+            --accent: #f39c12;
+            --success: #27ae60;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+        .tuner-card {
+            background: var(--surface);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        h1 {
+            font-weight: 400;
+            letter-spacing: 0.1rem;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+        .note-display {
+            font-size: 5rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .frequency {
+            font-size: 1.2rem;
+            opacity: 0.7;
+            margin-bottom: 1.5rem;
+        }
+        .meter {
+            height: 1.2rem;
+            background: #2c3e50;
+            border-radius: 1rem;
+            overflow: hidden;
+            margin: 1rem 0 1.5rem;
+            position: relative;
+        }
+        .meter-fill {
+            height: 100%;
+            width: 50%;
+            background: var(--accent);
+            border-radius: 1rem;
+            transition: width 0.15s ease-out, background 0.2s;
+        }
+        .meter.fine .meter-fill { background: var(--success); }
+        .strings {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1rem;
+        }
+        .string-btn {
+            background: #2c3e50;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 0.4rem 0.8rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .string-btn.active {
+            background: var(--accent);
+            color: #1a1a2e;
+            transform: scale(1.1);
+        }
+        .status {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        button {
+            background: #2c3e50;
+            border: none;
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 0.5rem;
+            transition: background 0.2s;
+        }
+        button:hover { background: #3d566e; }
+    </style>
+</head>
+<body>
+    <div class="tuner-card">
+        <h1>🎸 吉他调音器</h1>
+        <div class="note-display" id="noteText">--</div>
+        <div class="frequency" id="freqText">等待麦克风权限…</div>
+        <div class="meter" id="meterContainer">
+            <div class="meter-fill" id="meterFill" style="width:50%"></div>
+        </div>
+        <div class="strings" id="stringButtons"></div>
+        <div class="status" id="statusText">点击下方按钮开始</div>
+        <div>
+            <button id="startBtn">🎤 开始监听</button>
+            <button id="stopBtn">⏹️ 停止</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/pitchy@4.1.0/dist/pitchy.min.js"></script>
+    <script>
+        (function() {
+            // 吉他标准调弦（E2 A2 D3 G3 B3 E4）
+            const STRINGS = [
+                { name: 'E2', freq: 82.41 },
+                { name: 'A2', freq: 110.00 },
+                { name: 'D3', freq: 146.83 },
+                { name: 'G3', freq: 196.00 },
+                { name: 'B3', freq: 246.94 },
+                { name: 'E4', freq: 329.63 }
+            ];
+            let audioCtx = null;
+            let stream = null;
+            let animFrame = null;
+            let selectedString = STRINGS[0]; // 默认选中一弦
+
+            const noteText = document.getElementById('noteText');
+            const freqText = document.getElementById('freqText');
+            const meterFill = document.getElementById('meterFill');
+            const meterContainer = document.getElementById('meterContainer');
+            const statusText = document.getElementById('statusText');
+            const startBtn = document.getElementById('startBtn');
+            const stopBtn = document.getElementById('stopBtn');
+            const stringButtons = document.getElementById('stringButtons');
+
+            // 绘制琴弦选择按钮
+            STRINGS.forEach((s, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'string-btn' + (idx === 0 ? ' active' : '');
+                btn.textContent = s.name;
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.string-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    selectedString = STRINGS[idx];
+                });
+                stringButtons.appendChild(btn);
+            });
+
+            function getClosestNote(freq) {
+                if (!freq || freq <= 0) return null;
+                const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+                const A4 = 440;
+                const C0 = A4 * Math.pow(2, -4.75);
+                const halfSteps = Math.round(12 * Math.log2(freq / C0));
+                const noteFreq = C0 * Math.pow(2, halfSteps / 12);
+                const noteIndex = ((halfSteps % 12) + 12) % 12;
+                const octave = Math.floor(halfSteps / 12);
+                const noteName = noteNames[noteIndex] + octave;
+                const cents = 1200 * Math.log2(freq / noteFreq);
+                return { noteName, noteFreq, cents };
+            }
+
+            function centsToPercent(cents) {
+                // 映射：-50cent → 0%，0cent → 50%，+50cent → 100%
+                let val = (cents + 50) / 100 * 100;
+                return Math.max(0, Math.min(100, val));
+            }
+
+            async function startListening() {
+                if (audioCtx) await stopListening();
+                try {
+                    stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    const source = audioCtx.createMediaStreamSource(stream);
+                    const analyser = audioCtx.createAnalyser();
+                    analyser.fftSize = 2048;
+                    source.connect(analyser);
+
+                    const inputArray = new Float32Array(analyser.fftSize);
+                    statusText.textContent = '正在倾听…';
+                    startBtn.disabled = true;
+                    stopBtn.disabled = false;
+
+                    function update() {
+                        analyser.getFloatTimeDomainData(inputArray);
+                        const [pitch, clarity] = Pitchy.findPitch(inputArray, audioCtx.sampleRate);
+                        if (clarity > 0.85 && pitch > 60) {
+                            const result = getClosestNote(pitch);
+                            if (result) {
+                                noteText.textContent = result.noteName;
+                                freqText.textContent = `${pitch.toFixed(1)} Hz  |  偏差: ${result.cents.toFixed(0)} 音分`;
+                                const percent = centsToPercent(result.cents);
+                                meterFill.style.width = percent + '%';
+                                // 如果偏差在 ±5 音分内，且频率接近选中弦，变绿
+                                const isNearSelected = Math.abs(pitch - selectedString.freq) < selectedString.freq * 0.08;
+                                if (Math.abs(result.cents) < 5 && isNearSelected) {
+                                    meterContainer.classList.add('fine');
+                                    statusText.textContent = '完美！';
+                                } else {
+                                    meterContainer.classList.remove('fine');
+                                    statusText.textContent = '继续调整';
+                                }
+                            }
+                        } else {
+                            noteText.textContent = '--';
+                            freqText.textContent = '声音太弱或不稳定';
+                            meterFill.style.width = '50%';
+                            meterContainer.classList.remove('fine');
+                            statusText.textContent = '请弹奏琴弦';
+                        }
+                        animFrame = requestAnimationFrame(update);
+                    }
+                    update();
+                } catch (err) {
+                    statusText.textContent = '无法获取麦克风权限，请检查设置。';
+                    console.error(err);
+                }
+            }
+
+            async function stopListening() {
+                if (animFrame) cancelAnimationFrame(animFrame);
+                if (stream) {
+                    stream.getTracks().forEach(track => track.stop());
+                    stream = null;
+                }
+                if (audioCtx) {
+                    await audioCtx.close();
+                    audioCtx = null;
+                }
+                noteText.textContent = '--';
+                freqText.textContent = '已停止';
+                meterFill.style.width = '50%';
+                meterContainer.classList.remove('fine');
+                statusText.textContent = '已停止监听';
+                startBtn.disabled = false;
+                stopBtn.disabled = true;
+            }
+
+            startBtn.addEventListener('click', startListening);
+            stopBtn.addEventListener('click', stopListening);
+        })();
+    </script>
+</body>
+</html>

@@ -2,7 +2,10 @@ baseURL = "https://gato111pero.github.io/"   # 先填这个，后面部署用
 languageCode = "zh-cn"
 title = "shape tech"
 theme = "PaperMod"
-
+[[menu.main]]
+  name = "调音器"
+  url = "/tuner/"
+  weight = 30
 [params]
   author = "shape"
   description = "分享技术、生活和想法。"
