@@ -1,0 +1,11 @@
+baseURL = "https://gato111pero.github.io/"   # 先填这个，后面部署用
+languageCode = "zh-cn"
+title = "shape tech"
+theme = "PaperMod"
+
+[params]
+  author = "shape"
+  description = "分享技术、生活和想法。"
+  ShowReadingTime = true
+  ShowPostNavLinks = true
+  defaultTheme = "auto"
