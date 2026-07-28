@@ -16,3 +16,7 @@ theme = "PaperMod"
   ShowReadingTime = true
   ShowPostNavLinks = true
   defaultTheme = "auto"
+
+  [params.label]
+    icon = "logo1.png"
+    iconHeight = 30
