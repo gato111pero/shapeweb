@@ -7,6 +7,10 @@ theme = "PaperMod"
   url = "/about/"
   weight = 10
 [[menu.main]]
+  name = "订阅"
+  url = "/subscribe/"
+  weight = 20
+[[menu.main]]
   name = "调音器"
   url = "/tuner/"
   weight = 30
