@@ -1,104 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>Posts | shape tech</title>
-<meta name="keywords" content="">
-<meta name="description" content="Posts - shape tech">
-<meta name="author" content="shape">
-<link rel="canonical" href="https://gato111pero.github.io/posts/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.89ca4972ab5e6aaa05e9a0dae0c4bb64b26585bc79e36f5cf33614eea0283abe.css" integrity="sha256-icpJcqteaqoF6aDa4MS7ZLJlhbx5429c8zYU7qAoOr4=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://gato111pero.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://gato111pero.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://gato111pero.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://gato111pero.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://gato111pero.github.io/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://gato111pero.github.io/posts/index.xml" title="rss">
-<link rel="alternate" hreflang="en" href="https://gato111pero.github.io/posts/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#f39c12">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="调音器">
+<link rel="apple-touch-icon" href="/icon-192.png">
 
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-                color-scheme: dark;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .toc {
-                background: var(--entry);
-            }
-        }
-
-    </style>
-</noscript>
 <script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
-
-</script><meta property="og:url" content="https://gato111pero.github.io/posts/">
-  <meta property="og:site_name" content="shape tech">
-  <meta property="og:title" content="Posts">
-  <meta property="og:description" content="分享技术、生活和想法。">
-  <meta property="og:locale" content="zh_cn">
-  <meta property="og:type" content="website">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Posts">
-  <meta name="twitter:description" content="分享技术、生活和想法。">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://gato111pero.github.io/posts/"
-    }
-  ]
-}
+  
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then(registration => {
+          console.log('Service Worker 注册成功:', registration.scope);
+        })
+        .catch(error => {
+          console.log('Service Worker 注册失败:', error);
+        });
+    });
+  }
 </script>
 </head>
 <body class="list" id="top">
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="https://gato111pero.github.io/" accesskey="h" title="shape tech (Alt + H)">
-                        
-                    <img src="https://gato111pero.github.io/logo1_hu_1c65684bc2bad2d7.png" alt="" aria-label="logo"
+            <a href="http://localhost:1313/" accesskey="h" title="shape tech (Alt + H)">
+                    <img src="http://localhost:1313/logo1.png" alt="" aria-label="logo"
                         height="30">shape tech</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
@@ -125,17 +56,17 @@
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="https://gato111pero.github.io/about/" title="关于">
+                <a href="http://localhost:1313/about/" title="关于">
                     <span>关于</span>
                 </a>
             </li>
             <li>
-                <a href="https://gato111pero.github.io/subscribe/" title="订阅">
+                <a href="http://localhost:1313/subscribe/" title="订阅">
                     <span>订阅</span>
                 </a>
             </li>
             <li>
-                <a href="https://gato111pero.github.io/tuner/" title="调音器">
+                <a href="http://localhost:1313/tuner/" title="调音器">
                     <span>调音器</span>
                 </a>
             </li>
@@ -161,12 +92,12 @@
   <footer class="entry-footer">
 
 <span title='2026-07-27 12:20:24 +0800 CST'>July 27, 2026</span>&nbsp;·&nbsp;<span>1 min</span>&nbsp;·&nbsp;<span>shape</span></footer>
-  <a class="entry-link" aria-label="post link to Hello World" href="https://gato111pero.github.io/posts/hello-world/"></a>
+  <a class="entry-link" aria-label="post link to Hello World" href="http://localhost:1313/posts/hello-world/"></a>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://gato111pero.github.io/">shape tech</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">shape tech</a></span> · 
 
     
     

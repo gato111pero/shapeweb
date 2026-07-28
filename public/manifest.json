@@ -1,0 +1,10 @@
+{
+  "name": "sleepshape",
+  "short_name": "tuner",
+  "description": "个人网站与吉他调音器",
+  "start_url": "/tuner/",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#f39c12",
+  
+}
