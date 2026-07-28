@@ -2,17 +2,61 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>shape tech</title>
-    <link>http://localhost:1313/</link>
+    <link>https://gato111pero.github.io/</link>
     <description>Recent content on shape tech</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 27 Jul 2026 12:20:24 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 Jul 2026 00:00:00 +0800</lastBuildDate>
+    <atom:link href="https://gato111pero.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>关于</title>
+      <link>https://gato111pero.github.io/about/</link>
+      <pubDate>Tue, 28 Jul 2026 00:00:00 +0800</pubDate>
+      <guid>https://gato111pero.github.io/about/</guid>
+      <description>&lt;h2 id=&#34;-关于我&#34;&gt;👋 关于我&lt;/h2&gt;
+&lt;p&gt;你好，我是 &lt;strong&gt;shape&lt;/strong&gt;，一名热爱技术和音乐的程序员。&lt;/p&gt;
+&lt;h3 id=&#34;这个网站&#34;&gt;这个网站&lt;/h3&gt;
+&lt;p&gt;这里主要分享我在技术、生活和音乐方面的探索与思考：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;💻 &lt;strong&gt;技术&lt;/strong&gt; — 编程、工具、开源项目&lt;/li&gt;
+&lt;li&gt;🎸 &lt;strong&gt;音乐&lt;/strong&gt; — 吉他、调音器（见 &lt;a href=&#34;https://gato111pero.github.io/tuner/&#34;&gt;吉他调音器&lt;/a&gt;）&lt;/li&gt;
+&lt;li&gt;📝 &lt;strong&gt;生活&lt;/strong&gt; — 杂记与随想&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;联系我&#34;&gt;联系我&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;GitHub: &lt;a href=&#34;https://github.com/gato111pero&#34;&gt;gato111pero&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;保持好奇，持续学习。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>订阅</title>
+      <link>https://gato111pero.github.io/subscribe/</link>
+      <pubDate>Tue, 28 Jul 2026 00:00:00 +0800</pubDate>
+      <guid>https://gato111pero.github.io/subscribe/</guid>
+      <description>&lt;h2 id=&#34;-订阅支持&#34;&gt;☕ 订阅支持&lt;/h2&gt;
+&lt;p&gt;如果你觉得这个网站的内容对你有帮助，欢迎请我喝杯咖啡 ☕&lt;/p&gt;
+&lt;div style=&#34;display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; margin-top: 2rem;&#34;&gt;
+&lt;div style=&#34;text-align: center; max-width: 280px;&#34;&gt;
+    &lt;img src=&#34;https://gato111pero.github.io/wechatpay.jpg&#34; alt=&#34;微信支付&#34; style=&#34;width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);&#34;&gt;
+    &lt;p style=&#34;margin-top: 0.8rem; font-weight: 600;&#34;&gt;微信支付&lt;/p&gt;
+&lt;/div&gt;
+&lt;div style=&#34;text-align: center; max-width: 280px;&#34;&gt;
+    &lt;img src=&#34;https://gato111pero.github.io/alipay.jpg&#34; alt=&#34;支付宝&#34; style=&#34;width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);&#34;&gt;
+    &lt;p style=&#34;margin-top: 0.8rem; font-weight: 600;&#34;&gt;支付宝&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div style=&#34;text-align: center; margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;&#34;&gt;
+    &lt;p&gt;感谢你的支持！每一份心意都是我持续创作的动力 🙏&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
     <item>
       <title>Hello World</title>
-      <link>http://localhost:1313/posts/hello-world/</link>
+      <link>https://gato111pero.github.io/posts/hello-world/</link>
       <pubDate>Mon, 27 Jul 2026 12:20:24 +0800</pubDate>
-      <guid>http://localhost:1313/posts/hello-world/</guid>
+      <guid>https://gato111pero.github.io/posts/hello-world/</guid>
       <description>&lt;p&gt;hello im shape hello hello&lt;/p&gt;</description>
     </item>
   </channel>

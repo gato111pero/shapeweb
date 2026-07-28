@@ -14,6 +14,9 @@ theme = "PaperMod"
   name = "调音器"
   url = "/tuner/"
   weight = 30
+[markup.goldmark.renderer]
+  unsafe = true
+
 [params]
   author = "shape"
   description = "分享技术、生活和想法。"
