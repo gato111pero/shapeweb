@@ -3,6 +3,10 @@ languageCode = "zh-cn"
 title = "shape tech"
 theme = "PaperMod"
 [[menu.main]]
+  name = "关于"
+  url = "/about/"
+  weight = 10
+[[menu.main]]
   name = "调音器"
   url = "/tuner/"
   weight = 30
