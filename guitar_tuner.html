@@ -1,82 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guitar Tuner | 吉他调音器</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui}
-body{background:#0f1118;color:#eee;padding:2rem;}
-.container{max-width:600px;margin:0 auto;text-align:center;}
-.note-display{font-size:64px;font-weight:bold;margin:30px 0;color:#38bdf8;}
-.string-list{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:30px 0;}
-.string{padding:12px;background:#1e293b;border-radius:8px;font-weight:bold;}
-#startBtn{padding:14px 32px;font-size:18px;background:#2563eb;color:#fff;border:none;border-radius:10px;cursor:pointer;}
-#startBtn:hover{background:#1d4ed8;}
-</style>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0; url=/tuner/">
+    <title>吉他调音器 - 跳转中…</title>
+    <script>location.replace('/tuner/');</script>
 </head>
 <body>
-<div class="container">
-<h1>吉他调音器 Guitar Tuner</h1>
-<div class="note-display" id="noteDisplay">--</div>
-<div class="string-list">
-<div class="string">E2</div>
-<div class="string">A2</div>
-<div class="string">D3</div>
-<div class="string">G3</div>
-<div class="string">B3</div>
-<div class="string">E4</div>
-</div>
-<button id="startBtn">开启麦克风调音</button>
-</div>
-
-<script>
-// 音高频率映射
-const noteFrequencies = {
-    'E2':82.41, 'A2':110.00, 'D3':146.83,
-    'G3':196.00, 'B3':246.94, 'E4':329.63
-};
-let audioContext;
-let analyser;
-let isListening = false;
-const noteDisplay = document.getElementById('noteDisplay');
-const startBtn = document.getElementById('startBtn');
-
-startBtn.onclick = async ()=>{
-    if(isListening){
-        audioContext.close();
-        isListening=false;
-        startBtn.textContent="开启麦克风调音";
-        noteDisplay.innerText="--";
-        return;
-    }
-    try{
-        const stream = await navigator.mediaDevices.getUserMedia({audio:true});
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        analyser = audioContext.createAnalyser();
-        const source = audioContext.createMediaStreamSource(stream);
-        source.connect(analyser);
-        analyser.fftSize = 2048;
-        isListening=true;
-        startBtn.textContent="停止调音";
-        detectPitch();
-    }catch(err){
-        alert("麦克风权限被拒绝，请允许麦克风访问！");
-        console.error(err);
-    }
-}
-
-// 简易音高检测（轻量版）
-function detectPitch(){
-    if(!isListening) return;
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
-    analyser.getByteFrequencyData(dataArray);
-    // 简化逻辑，这里可以替换成专业算法pitchdetect
-    requestAnimationFrame(detectPitch);
-}
-</script>
+    <p>正在跳转到 <a href="/tuner/">吉他调音器</a>…</p>
 </body>
 </html>
-<script src="/js/pitchdetect.js"></script>
-<a href="/guitar-tuner.html">吉他调音器</a>
